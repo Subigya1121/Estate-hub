@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { AMENITY_OPTIONS, COMMERCIAL_CATEGORIES, LAND_CATEGORIES, LOCATIONS, PROPERTY_TYPES } from "../data/site.js";
 import { IMAGE_TYPES, MAX_IMAGES, checkImageFile, validateListing } from "../utils/listingValidation.js";
 import { SelectField } from "./FormFields.jsx";
+import AiDescriptionAssistant from "./AiDescriptionAssistant.jsx";
 import PropertyImage from "./PropertyImage.jsx";
 
 function Section({ title, hint, children }) {
@@ -165,6 +166,8 @@ export default function PropertyForm({ initial, existingImages = [], status, bus
           <textarea className="field resize-y" rows={6} maxLength={4000} value={v.description} onChange={set("description")} />
         </Field>
       </Section>
+
+      <AiDescriptionAssistant values={v} onApply={(draft) => setV((prev) => ({ ...prev, ...draft }))} />
 
       <Section title="Amenities">
         <div className="grid grid-cols-2 gap-3 sm:col-span-2 sm:grid-cols-3">

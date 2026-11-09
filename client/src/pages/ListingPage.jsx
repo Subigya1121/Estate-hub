@@ -4,6 +4,7 @@ import { SORT_OPTIONS } from "../data/site.js";
 import { PAGE_SIZE, listProperties } from "../services/propertyService.js";
 import useAsync from "../hooks/useAsync.js";
 import FilterPanel from "../components/FilterPanel.jsx";
+import AiSearchBox from "../components/AiSearchBox.jsx";
 import PropertyGrid from "../components/PropertyGrid.jsx";
 import EmptyState from "../components/EmptyState.jsx";
 import { SelectField } from "../components/FormFields.jsx";
@@ -52,6 +53,7 @@ export default function ListingPage({ scope }) {
       </section>
 
       <section className="container-x py-10 sm:py-14">
+        <AiSearchBox />
         <FilterPanel scope={scope} values={values} onChange={update} onClear={clear} activeCount={activeCount} />
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

@@ -1,2 +1,21 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-*
+# Dependencies and build output
+node_modules
+dist
+dist-ssr
+
+# Environment files: keep the .env.example templates, never commit real values
+.env
+.env.*
+!.env.example
+*.local
+
+# Python-generated files and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Archives and logs
+*.zip
+*.log
+.DS_Store

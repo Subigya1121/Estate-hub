@@ -6,6 +6,7 @@ React Router and Supabase (Postgres, Auth, Storage).
 
 ```
 estatehub/
+├── ai-service/ Python FastAPI service for AI search, concierge and listing drafts
 ├── client/      React + Vite + Tailwind frontend
 └── supabase/    SQL migrations, optional demo data, setup guide and access-rule tests
 ```
@@ -49,6 +50,13 @@ npm run build     production build into client/dist
 npm run preview   serve the production build
 ```
 
+## Deploy the AI service to Render
+1. Push this repository to a Git provider and create a Render Blueprint from its repository. Render reads `render.yaml` and creates the `estatehub-ai` web service from `ai-service/`.
+2. Enter `AI_PROVIDER` (`openai` or `anthropic`), `AI_API_KEY`, `AI_MODEL`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, and `ALLOWED_ORIGINS` when Render prompts for them. Set `ALLOWED_ORIGINS` to the exact HTTPS origin of the deployed frontend. Keep the provider key in Render, never in the frontend.
+3. Wait for the service health check to pass, then confirm `https://<your-render-service>.onrender.com/health` returns `{"ok":true,...}`.
+4. On the frontend host, set `VITE_AI_SERVICE_URL` to the Render service URL (no trailing slash), along with the Supabase URL and publishable key. Redeploy the frontend because Vite embeds these values at build time.
+5. In Supabase Auth URL Configuration, add the deployed frontend URL and its auth redirect URLs.
+
 ## Database access-rule tests
 `supabase/tests/` checks the policies and workflow triggers on a local Postgres (PGlite) with small stand-ins for
 Supabase auth and storage:
@@ -62,4 +70,4 @@ These are not a substitute for testing on your real Supabase project.
 
 ## Not built yet
 Email notifications, an admin dashboard for contact messages and users, rate limiting for public forms,
-Privacy and Terms pages, and the AI features.
+Privacy and Terms pages, and production AI provider/deployment configuration.
